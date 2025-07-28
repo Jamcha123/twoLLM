@@ -11,7 +11,7 @@ import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-ch
 import {} from 'firebase/firestore'
 
 const config = {
-    apiKey: "",
+    apiKey: ,
     authDomain: "ai-hub-8f387.firebaseapp.com",
     projectId: "ai-hub-8f387",
     storageBucket: "ai-hub-8f387.firebasestorage.app",
@@ -38,14 +38,22 @@ export default function App(){
       const username = document.getElementById("username1")
       const password = document.getElementById("password1")
 
-      signInWithEmailAndPassword(auth, username.value, password.value)
+      signInWithEmailAndPassword(auth, username.value, password.value).then((value) => {
+        alert(value)
+      }).catch((err) => {
+        alert(err)
+      })
     })
     document.getElementById("register").addEventListener("submit", (e) => {
       e.preventDefault()
       const username = document.getElementById("username2")
       const password = document.getElementById("password2")
 
-      createUserWithEmailAndPassword(auth, username.value, password.value)
+      createUserWithEmailAndPassword(auth, username.value, password.value).then((value) => {
+        alert(value)
+      }).catch((err) => {
+        alert(err)
+      })
     })
     document.getElementById("google1").addEventListener("click", (e) => {
       e.preventDefault()
