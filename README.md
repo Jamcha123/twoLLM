@@ -1,8 +1,8 @@
-# twoLLM
-twoLLM is a multiple LLM prompter that allows you to prompt different LLMs in the same chatbot.
+# twoPrompt
+twoPrompt is a multiple LLM prompter that allows you to prompt different LLMs in the same cli.
 
-twoLLM uses the python command line to make prompting different LLMs easier, it doesn't have a website except its login page (so you can login to the paid version).
+twoPrompt uses the python command line to make prompting different LLMs easier
 
-the command line has a free guest version that anyone can use (but limited usage per day) and a paid version that you login to and pay as you go (20 cents per 100 prompts)
+the command line has a free guest version that anyone can use (but limited usage, 20 free prompt) and a paid version that you login to and pay as you go (0.02 dollars per prompt or 2 dollars per 100 prompt)
 
-twoLLM allows you choose and prompt different LLMs in the same place.
+twoPrompt allows you choose and prompt different LLMs in the same place.
