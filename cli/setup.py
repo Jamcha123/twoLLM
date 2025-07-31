@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="twoprompt",
-    version="1.0.1",
+    version="1.0.5",
     description="twoprompt is a python cli that allows you to prompt different LLMs",
     packages=find_packages(),
     

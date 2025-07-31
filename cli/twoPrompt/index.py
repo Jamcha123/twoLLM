@@ -8,14 +8,14 @@ import math
 from dotenv import load_dotenv
 load_dotenv()
 
-def Search(limit: int, uid: str, model: str):
+def Search(limit: int, uid: str, models: str):
     if limit == 0: 
         subprocess.call("clear", shell=True)
         print("no more prompts: " + str(limit) + ", login and buy more prompts\n")
         con1 = input("go back to main (y/n)\n")
         if con1 == "Y" or con1 == "y":
             return main()
-        return Search(limit, uid, model)
+        return Search(limit, uid, models)
     loop = True
     while loop:
         subprocess.call("clear", shell=True)
@@ -26,12 +26,12 @@ def Search(limit: int, uid: str, model: str):
             con1 = input("go back to main (y/n)\n")
             if con1 == "Y" or con1 == "y":
                 return main()
-            return Search(limit, uid, model)
+            return Search(limit, uid, models)
         search = input("enter a search query for google or :wq to exit\n")
         if search == ":wq":
             return model(limit, uid)
                     
-        ans = model + search
+        ans = models + search
         data = (requests.get(ans).json())["items"]
         arr = []
         for x in range(len(data)):
@@ -83,7 +83,8 @@ def model(limit: int, uid: str):
             return hub(uid, bill["balance"])
         else:
             model(limit, uid)
-    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": "Cohere-command-r-plus-08-2024", "7": "https://www.googleapis.com/customsearch/v1?key=" + os.getenv("KEY") +"&cx=317ffe688b15a4900&q="}
+    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": 
+           "Cohere-command-r-plus-08-2024", "7": "https://www.googleapis.com/customsearch/v1?key=" + os.getenv("KEY") +"&cx=317ffe688b15a4900&q="}
     for x in ["1", "2", "3", "4", "5", "6", "7"]:
         if x == "7":
             print({str(x): "Google Search Prompter"})
@@ -232,6 +233,9 @@ def guestPrompt(model: str, limit: int):
         target = input("write a prompt for " + model + " here or enter :wq to go back : ")
 
         if target == ":wq":
+            f1 = open("limit.txt", "w")
+            f1.write(str(limit))
+            f1.close()
             return main()
         data = requests.get("https://models-jmoufuae2a-uc.a.run.app?model=" + str(model) + "&text=" + target).text
         print(data + "\n")
@@ -269,6 +273,9 @@ def guestModels(id: str, limit: int):
             case "7":
                 return Search(limit, id, obj["7"])
             case ":wq":
+                f1 = open("limit.txt", "r")
+                f1.write(str(limit))
+                f1.close()
                 return main()
             case _:
                 print(target + " isn't an option, enter again")
@@ -276,15 +283,21 @@ def main():
     subprocess.call("clear", shell=True)
     print("enter :wq to exit the program")
     while True:
-        target = input("1 - enter 1 to login\n2 - enter 2 to register\n3 - enter 3 for the guest account (no login needed but it only has 5 free prompt)\n4 - enter 4 to delete your account\n")
+        target = input("1 - enter 1 to login\n2 - enter 2 to register\n3 - enter 3 for the guest account (no login needed but it only has 10 free prompt)\n4 - enter 4 to delete your account\n")
         match(target): 
             case "1": 
                 return login()
             case "2":
                 return register()
             case "3":
+                if "limit.txt" not in os.listdir():
+                    f1 = open("limit.txt", "w")
+                    f1.write(str("10"))
+                    f1.close()
+                f1 = open("limit.txt", "r")
+                ans = int(f1.read())
                 token = os.urandom(8).hex()
-                return guestModels(token, 1)
+                return guestModels(token, ans)
             case "4": 
                 return deleteAccount()
             case ":wq":
