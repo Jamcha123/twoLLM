@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import requests
 import json
 import subprocess
@@ -39,11 +40,11 @@ def model(limit: int, uid: str):
             return hub(uid, bill["balance"])
         else:
             model(limit, uid)
-    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B"}
-    for x in ["LLM 1", "LLM 2", "LLM 3", "LLM 4", "LLM 5"]:
+    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": "Cohere-command-r-plus-08-2024"}
+    for x in ["LLM 1", "LLM 2", "LLM 3", "LLM 4", "LLM 5", "LLM 6"]:
         print({str((str(x).split(" "))[1]): obj[x]})
     while True:
-        target = input("enter a model like 1, 2, 3, 4, 5 or :wq to go back ")
+        target = input("enter a model like 1, 2, 3, 4, 5, 6 or :wq to go back ")
         match(target):
             case "1": 
                 return prompting(obj["LLM 1"], limit, uid)
@@ -55,6 +56,8 @@ def model(limit: int, uid: str):
                 return prompting(obj["LLM 4"], limit, uid)
             case "5":
                 return prompting(obj["LLM 5"], limit, uid)
+            case "6": 
+                return prompting(obj["LLM 6"], limit, uid)
             case ":wq":
                 return hub(uid)
             case _:
@@ -73,7 +76,7 @@ def billing(id: str):
             if amount[x].isdigit() != True:
                 return "amount is not a number" 
         data = requests.get("https://checkout-jmoufuae2a-uc.a.run.app?amount=" + amount + "&id=" + id).text
-        print("click link to buy more prompts " + data + "\n")
+        print("click link to buy more prompts: " + data + "\n")
 
         con = input("finished (y/n)\n")
         if con == "y" or con == "Y":
@@ -184,7 +187,7 @@ def guestPrompt(model: str, limit: int):
             return main()
         data = requests.get("https://models-jmoufuae2a-uc.a.run.app?model=" + str(model) + "&text=" + target).text
         print(data + "\n")
-
+        limit -= 1
 def guestModels(id: str, limit: int):
     subprocess.call("clear", shell=True)
     if limit == 0:
@@ -194,11 +197,11 @@ def guestModels(id: str, limit: int):
             return main()
         else:
             return guestModels(id, limit)
-    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B"}
-    for x in ["LLM 1", "LLM 2", "LLM 3", "LLM 4", "LLM 5"]:
+    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": "Cohere-command-r-plus-08-2024"}
+    for x in ["LLM 1", "LLM 2", "LLM 3", "LLM 4", "LLM 5", "LLM 6"]:
         print({str((str(x).split(" "))[1]): obj[x]})
     while True:
-        target = input("enter a model to prompt like 1, 2, 3, 4, 5 or :wq to go back\n") 
+        target = input("enter a model to prompt like 1, 2, 3, 4, 5, 6 or :wq to go back\n") 
         match(target):
             case "1":
                 return guestPrompt(obj["LLM 1"], limit)
@@ -210,6 +213,8 @@ def guestModels(id: str, limit: int):
                 return guestPrompt(obj["LLM 4"], limit)
             case "5": 
                 return guestPrompt(obj["LLM 5"], limit)
+            case "6":
+                return guestPrompt(obj["LLM 6"], limit)
             case ":wq":
                 return main()
             case _:
@@ -234,4 +239,6 @@ def main():
             case _:
                 subprocess.call("clear", shell=True)
                 print(target + " isn't an option, pick another option\n")
-print(main())
+
+if __name__ == "__main__":
+    print(main())
