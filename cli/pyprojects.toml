@@ -4,4 +4,3 @@ build-backend = "setuptools.build_meta"
 
 [pypi]
     username=__token__
-    password=pypi-AgEIcHlwaS5vcmcCJGQwZDBjNGVhLTcwYzUtNDA2Ny05MGUyLTg0OGFlNjdjOTJmMgACEVsxLFsidHdvcHJvbXB0Il1dAAIsWzIsWyIxZTc5YmQ1MS04MWE4LTQ4NzAtYTdlMS05ZjUyNGEyYTAyMzYiXV0AAAYgTr4JXznfa3o4WK2dKwP59tB1UMB-Vaa8H5PcRVfUyzI
