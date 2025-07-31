@@ -5,7 +5,50 @@ import subprocess
 import os
 import sys
 import math
+from dotenv import load_dotenv
+load_dotenv()
 
+def Search(limit: int, uid: str, model: str):
+    if limit == 0: 
+        subprocess.call("clear", shell=True)
+        print("no more prompts: " + str(limit) + ", login and buy more prompts\n")
+        con1 = input("go back to main (y/n)\n")
+        if con1 == "Y" or con1 == "y":
+            return main()
+        return Search(limit, uid, model)
+    loop = True
+    while loop:
+        subprocess.call("clear", shell=True)
+        print("google search prompter\nprompts left: " + str(limit) + "\n")
+        if limit == 0: 
+            subprocess.call("clear", shell=True)
+            print("no more prompts: " + str(limit) + ", login and buy more prompts\n")
+            con1 = input("go back to main (y/n)\n")
+            if con1 == "Y" or con1 == "y":
+                return main()
+            return Search(limit, uid, model)
+        search = input("enter a search query for google or :wq to exit\n")
+        if search == ":wq":
+            return model(limit, uid)
+                    
+        ans = model + search
+        data = (requests.get(ans).json())["items"]
+        arr = []
+        for x in range(len(data)):
+            title = data[x]["title"]
+            link = data[x]["link"]
+            snippet = data[x]["snippet"]
+
+            print(str({title, link, snippet}) + "\n")
+        con2 = input("go back (y/n)\n")
+        if con2 == "y" or con2 == "Y":
+            return model(limit, uid)
+        else:
+            loop = True
+
+        target = requests.get("https://update-balance-jmoufuae2a-uc.a.run.app?uid=" + uid).text
+    
+        limit -= 1
 def prompting(models: str, limit: int, uid: str): 
     loop = True
     subprocess.call("clear", shell=True)
@@ -40,11 +83,14 @@ def model(limit: int, uid: str):
             return hub(uid, bill["balance"])
         else:
             model(limit, uid)
-    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": "Cohere-command-r-plus-08-2024"}
-    for x in ["LLM 1", "LLM 2", "LLM 3", "LLM 4", "LLM 5", "LLM 6"]:
-        print({str((str(x).split(" "))[1]): obj[x]})
+    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": "Cohere-command-r-plus-08-2024", "7": "https://www.googleapis.com/customsearch/v1?key=" + os.getenv("KEY") +"&cx=317ffe688b15a4900&q="}
+    for x in ["1", "2", "3", "4", "5", "6", "7"]:
+        if x == "7":
+            print({str(x): "Google Search Prompter"})
+            continue
+        print({str(x): obj["LLM " + str(x)]})
     while True:
-        target = input("enter a model like 1, 2, 3, 4, 5, 6 or :wq to go back ")
+        target = input("enter a model like 1, 2, 3, 4, 5, 6, 7 or :wq to go back ")
         match(target):
             case "1": 
                 return prompting(obj["LLM 1"], limit, uid)
@@ -58,8 +104,10 @@ def model(limit: int, uid: str):
                 return prompting(obj["LLM 5"], limit, uid)
             case "6": 
                 return prompting(obj["LLM 6"], limit, uid)
+            case "7":
+                return Search(limit, uid, obj["7"])
             case ":wq":
-                return hub(uid)
+                return hub(uid, math.ceil(limit))
             case _:
                 print(target + " isn't a option pick another")
 
@@ -197,11 +245,14 @@ def guestModels(id: str, limit: int):
             return main()
         else:
             return guestModels(id, limit)
-    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": "Cohere-command-r-plus-08-2024"}
-    for x in ["LLM 1", "LLM 2", "LLM 3", "LLM 4", "LLM 5", "LLM 6"]:
+    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": "Cohere-command-r-plus-08-2024", "7": "https://www.googleapis.com/customsearch/v1?key=" + os.getenv("KEY") +"&cx=317ffe688b15a4900&q="}
+    for x in ["LLM 1", "LLM 2", "LLM 3", "LLM 4", "LLM 5", "LLM 6", "7"]:
+        if x == "7":
+            print({str(x): str("Google Search Prompter")})
+            continue
         print({str((str(x).split(" "))[1]): obj[x]})
     while True:
-        target = input("enter a model to prompt like 1, 2, 3, 4, 5, 6 or :wq to go back\n") 
+        target = input("enter a model to prompt like 1, 2, 3, 4, 5, 6, 7 or :wq to go back\n") 
         match(target):
             case "1":
                 return guestPrompt(obj["LLM 1"], limit)
@@ -215,6 +266,8 @@ def guestModels(id: str, limit: int):
                 return guestPrompt(obj["LLM 5"], limit)
             case "6":
                 return guestPrompt(obj["LLM 6"], limit)
+            case "7":
+                return Search(limit, id, obj["7"])
             case ":wq":
                 return main()
             case _:
@@ -231,7 +284,7 @@ def main():
                 return register()
             case "3":
                 token = os.urandom(8).hex()
-                return guestModels(token, 5)
+                return guestModels(token, 1)
             case "4": 
                 return deleteAccount()
             case ":wq":
