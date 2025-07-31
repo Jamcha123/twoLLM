@@ -66,7 +66,7 @@ def prompting(models: str, limit: int, uid: str):
         if target == ":wq":
             bill = requests.get("https://billing-jmoufuae2a-uc.a.run.app?uid=" + uid).json()
             return hub(uid, bill["balance"])
-        ans = "https://models-jmoufuae2a-uc.a.run.app?model=" + models + "&text=" + target
+        ans = "links?model=" + models + "&text=" + target
         data = requests.get(ans).text
         print(data + "\n", end="\n") 
         target = requests.get("https://update-balance-jmoufuae2a-uc.a.run.app?uid=" + uid).text
@@ -155,7 +155,7 @@ def deleteAccount():
     if email == ":wq":
         return main()
     
-    data = requests.get("https://deletion-jmoufuae2a-uc.a.run.app?email=" + email).text
+    data = requests.get("link?email=" + email).text
     if(data == '{"code":"ECONNRESET"}'):
         print("user doesn't exist in the records")
 
@@ -185,7 +185,7 @@ def register():
         if password == ":wq":
             return main()
     
-    data = requests.get("https://register-jmoufuae2a-uc.a.run.app?email=" + email + "&password=" + password).text
+    data = requests.get("link?email=" + email + "&password=" + password).text
     
     return login()
 
@@ -201,7 +201,7 @@ def login():
         password = input("enter your password or enter :wq to go back\n")
         
     
-        link = "https://login-jmoufuae2a-uc.a.run.app?email=" + email + "&password=" + password
+        link = "link?email=" + email + "&password=" + password
         data = requests.get(link).text
     
         if data == "There is no user record corresponding to the provided identifier." or data == '{"code":"ECONNRESET"}':
@@ -233,11 +233,8 @@ def guestPrompt(model: str, limit: int):
         target = input("write a prompt for " + model + " here or enter :wq to go back : ")
 
         if target == ":wq":
-            f1 = open("limit.txt", "w")
-            f1.write(str(limit))
-            f1.close()
             return main()
-        data = requests.get("https://models-jmoufuae2a-uc.a.run.app?model=" + str(model) + "&text=" + target).text
+        data = requests.get("linkp?model=" + str(model) + "&text=" + target).text
         print(data + "\n")
         limit -= 1
 def guestModels(id: str, limit: int):
@@ -273,9 +270,6 @@ def guestModels(id: str, limit: int):
             case "7":
                 return Search(limit, id, obj["7"])
             case ":wq":
-                f1 = open("limit.txt", "r")
-                f1.write(str(limit))
-                f1.close()
                 return main()
             case _:
                 print(target + " isn't an option, enter again")
@@ -290,12 +284,7 @@ def main():
             case "2":
                 return register()
             case "3":
-                if "limit.txt" not in os.listdir():
-                    f1 = open("limit.txt", "w")
-                    f1.write(str("10"))
-                    f1.close()
-                f1 = open("limit.txt", "r")
-                ans = int(f1.read())
+                ans = 10
                 token = os.urandom(8).hex()
                 return guestModels(token, ans)
             case "4": 
