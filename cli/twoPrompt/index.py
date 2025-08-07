@@ -60,7 +60,7 @@ def prompting(models: str, limit: int, uid: str):
         if target == ":wq":
             bill = requests.get("https://billing-jmoufuae2a-uc.a.run.app?uid=" + uid).json()
             return hub(uid, bill["balance"])
-        ans = "https://models-jmoufuae2a-uc.a.run.app?model=" + models + "&text=" + target
+        ans = "link?model=" + models + "&text=" + target
         data = requests.get(ans).text
         print(data + "\n", end="\n") 
         target = requests.get("https://update-balance-jmoufuae2a-uc.a.run.app?uid=" + uid).text
@@ -78,7 +78,7 @@ def model(limit: int, uid: str):
         else:
             model(limit, uid)
     obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": 
-           "Cohere-command-r-plus-08-2024", "7": "https://search-tu6dy325kq-uc.a.run.app?query="}
+           "Cohere-command-r-plus-08-2024", "7": "link?query="}
     for x in ["1", "2", "3", "4", "5", "6", "7"]:
         if x == "7":
             print({str(x): "Google Search Prompter"})
