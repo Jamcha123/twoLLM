@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta title="TwoPrompt chat - ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TwoPrompt Chat - Web based chatbot</title>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeUEpErAAAAAHJn66FWfNdoc9QSsqxjeVpj6DPa"></script>
+    <script>
+      function onClick(e) {
+        e.preventDefault();
+        grecaptcha.enterprise.ready(async () => {
+          const token = await grecaptcha.enterprise.execute('6LeUEpErAAAAAHJn66FWfNdoc9QSsqxjeVpj6DPa', {action: 'LOGIN'});
+        });
+      }
+    </script>
+    <script type="module" crossorigin src="/public/index-BfzIgOqo.js"></script>
+    <link rel="stylesheet" crossorigin href="/public/index-B091r3cz.css">
+  </head>
+  <body class="bg-white overflow-hidden ">
+    <div id="root" class="fixed w-[100%] h-[100%] m-auto p-[0] bg-transparent " ></div>
+  </body>
+</html>

@@ -234,7 +234,7 @@ def guestPrompt(model: str, limit: int):
             f1.write(str(limit))
             f1.close()
             return main()
-        data = requests.get("https://models-jmoufuae2a-uc.a.run.app?model=" + str(model) + "&text=" + target).text
+        data = requests.get("link?model=" + str(model) + "&text=" + target).text
         print(data + "\n")
         limit -= 1
 def guestModels(id: str, limit: int):
@@ -249,7 +249,7 @@ def guestModels(id: str, limit: int):
             return main()
         else:
             return guestModels(id, limit)
-    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": "Cohere-command-r-plus-08-2024", "7": "https://search-tu6dy325kq-uc.a.run.app?query="}
+    obj = {"LLM 1": "DeepSeek-V3-0324", "LLM 2": "Llama-4-Scout-17B-16E-Instruct", "LLM 3": "Meta-Llama-3.1-405B-Instruct", "LLM 4": "Phi-4-mini-instruct", "LLM 5": "Ministral-3B", "LLM 6": "Cohere-command-r-plus-08-2024", "7": "link?query="}
     for x in ["LLM 1", "LLM 2", "LLM 3", "LLM 4", "LLM 5", "LLM 6", "7"]:
         if x == "7":
             print({str(x): str("Google Search Prompter")})

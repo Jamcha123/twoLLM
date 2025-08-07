@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer components{
+    .text{
+        @apply text-2xl text-black mt-[0%] 
+    }
+}
