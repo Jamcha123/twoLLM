@@ -24,10 +24,13 @@ function AddNavbar(){
           </motion.div>
         </div>
       </ul>
-      <ul className="flex flex-row align-middle justify-evenly text-center min-w-[25%] min-h-[100%]">
-        <div className="relative w-[12em] h-[3em] m-auto p-[0] rounded-md flex flex-col align-middle justify-center text-center bg-sky-950 ">
-          <motion.button initial={{scale: 1}} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} transition={{type: "spring", duration: 1}} className="relative cursor-pointer underline underline-offset-2 w-[100%] h-[50%] m-auto p-[0] bg-transparent text-xl text-center text-white " >
+      <ul className="flex flex-col align-middle justify-evenly text-center min-w-[25%] min-h-[100%]">
+        <div className="relative w-[100%] h-[100%] m-auto p-[0] rounded-md flex flex-row align-middle justify-center text-center bg-sky-950 ">
+          <motion.button initial={{scale: 1}} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} transition={{type: "spring", duration: 1}} className="relative cursor-pointer underline underline-offset-2 w-[50%] h-[100%] m-auto p-[0] bg-transparent text-xl text-center text-white " >
             <a href="/chats.html">Start Prompting</a>
+          </motion.button>
+          <motion.button initial={{scale: 1}} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} className="relative w-[50%] h-[100%] m-0 ml-auto mr-auto mt-[0%] md:mb-[0%] p-[0] bg-gradient-to-tr from-emerald-800 to-lime-800 text-center text-xl text-white cursor-pointer underline underline-offset-2 hover:rounded-md duration-100 transition-all "  >
+              <a href="/developer.html">The Developer API</a>
           </motion.button>
         </div>
       </ul>
@@ -115,7 +118,7 @@ export default function App(){
             </div>
           </div>
           <div className="relative w-[100%] h-[35%] m-auto p-[0] bg-black flex flex-row md:flex-col align-middle justify-center text-center ">
-            <div className="relative w-[100%] md:w-[45%] h-[100%] md:h-[50%] m-auto p-[0] rotate-z-[0deg] grid grid-cols-2 grid-rows-2 md:flex md:align-middle md:justify-center md:text-center gap-[30px] ">
+            <div className="relative w-[100%] md:w-[45%] h-[100%] md:h-[50%] m-auto p-[0] rotate-z-[0deg] grid grid-cols-2 grid-rows-2 lg:flex lg:flex-row lg:align-middle lg:justify-center md:text-center gap-[30px] ">
               <motion.button initial={{scale: 1}} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} className="relative w-[10em] h-[3em] m-0 ml-auto mr-auto mt-[0%] p-[0] bg-gradient-to-tr from-emerald-800 to-lime-800 text-center text-xl text-white cursor-pointer underline underline-offset-2 hover:rounded-md duration-100 transition-all "  >
                 <a href="https://github.com/Jamcha123/twoPrompt">The Github Repo</a>
               </motion.button>
@@ -124,6 +127,9 @@ export default function App(){
               </motion.button>
               <motion.button initial={{scale: 1}} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} className="relative w-[10em] h-[3em] m-0 ml-auto mr-auto mt-[0%] md:mb-[0%] p-[0] bg-gradient-to-tr from-emerald-800 to-lime-800 text-center text-xl text-white cursor-pointer underline underline-offset-2 hover:rounded-md duration-100 transition-all "  >
                 <a href="/chats.html">Start Prompting</a>
+              </motion.button>
+              <motion.button initial={{scale: 1}} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} className="relative w-[10em] h-[3em] m-0 ml-auto mr-auto mt-[0%] md:mb-[0%] p-[0] bg-gradient-to-tr from-emerald-800 to-lime-800 text-center text-xl text-white cursor-pointer underline underline-offset-2 hover:rounded-md duration-100 transition-all "  >
+                <a href="/developer.html">The Developer API</a>
               </motion.button>
             </div>
           </div>
@@ -136,17 +142,19 @@ export default function App(){
         <div className="relative w-[100%] h-[95%] m-auto p-[0] bg-transparent flex flex-col align-middle justify-center text-center ">
           <div className="relative w-[100%] h-[95%] m-auto p-[0] flex flex-col align-middle justify-start text-start">
             <p className="text-2xl text-white ml-[15%] mt-[2%] " >
-              TwoPrompt is a Python CLI tool for Prompting LLMs<br />
+              TwoPrompt is a Chat App and Developer API that prompts different LLMs <br />
+            </p>
+            <p className="text-2xl text-white ml-[15%] mt-[2%] " >
+              TwoPrompt Chat App is Free <br />
+            </p>
+            <p className="text-2xl text-white ml-[15%] mt-[2%] " >
+              TwoPrompt Developer API is paid and costs $0.04 per request<br />
             </p>
             <p className="text-2xl text-white ml-[15%] mt-[2%]">
-              TwoPrompt has a free guest account (no login needed, 10 free prompts)<br />
+              TwoPrompt Chat App:  <a className="underline underline-offset-2 text-white text-2xl" href="/chats.html"> Start Prompting</a><br />
             </p>
             <p className="text-2xl text-white ml-[15%] mt-[2%]">
-              TwoPrompt has a paid login account (login needed, unlimited prompts)<br />
-              Cost is $0.02 per prompt or $1 per 50 prompts
-            </p>
-            <p className="text-2xl text-white ml-[15%] mt-[2%]">
-              <code>pip install twoprompt --break-system-packages</code>
+              TwoPrompt Developer API:  <a className="underline underline-offset-2 text-white text-2xl"  href="/developer.html"> Start Developing</a><br />
             </p>
           </div>
         </div>
@@ -172,8 +180,12 @@ export default function App(){
             <code>LLM 5: Phi-4-mini-instruc</code><br />
           </p>
           <p className="text-2xl text-white mr-[15%] mt-[2%] ">
-            <code>LLM 6: Meta-Llama-3.1-405B-Instruc4</code><br />
+            <code>LLM 6: Meta-Llama-3.1-405B-Instruct</code><br />
           </p>
+          <p className="text-2xl text-white mr-[15%] mt-[2%] ">
+            <code>LLM 7: jais-30b-chat</code><br />
+          </p>
+
         </div>
       </section>
     </div>

@@ -1,8 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Average+Sans&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Average+Sans&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
-li a, h1, button, p{
-    font-family: 'Open Sans', sans-serif;
+@layer components{
+    .items{
+        @apply relative w-[100%] min-h-[fit-content] h-[fit-content] m-0 ml-auto mr-auto mt-[5%] p-[0] bg-transparent
+        flex flex-row align-middle justify-center text-center
+    }
+    .tokens{
+        @apply text-2xl text-black
+    }
+    .items_add{
+        @apply relative w-[100%] h-[4em] min-h-[4em] m-[0] ml-auto mr-auto mt-[3%] p-[0] bg-gray-400
+        flex flex-row align-middle justify-evenly text-center mb-[2%]
+    }
+    .histories{
+        @apply text-2xl text-black flex flex-col align-middle justify-center text-center
+    }
+}
+li a, h1, p, a, input{
+    font-family: 'Lato', sans-serif;
     font-weight: 300;
     font-style: normal;
+}
+button{
+    font-family: "Rubik", sans-serif;
+    font-weight: 200;
 }

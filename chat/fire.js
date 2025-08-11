@@ -14,6 +14,7 @@ const config = {
 
 const app = initializeApp(config)
 
+
 const appcheck = initializeAppCheck(app, {
     provider: new ReCaptchaEnterpriseProvider("6LeUEpErAAAAAHJn66FWfNdoc9QSsqxjeVpj6DPa"),
     isTokenAutoRefreshEnabled: true

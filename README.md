@@ -1,17 +1,17 @@
 # twoPrompt
-twoPrompt is a python command line tool that allows you to prompt different LLMs and Google Search Engine API.
+twoPrompt is a Chat App and A Developer API that allows you to prompt different LLMs
 
-twoPrompt has a paid account (login needed) and a guest account (no login needed but limited free prompts)
+TwoPrompt comes with 7 different LLMs that you can choose from. 
 
-the guest account has 10 free prompts.
+twoPrompt comes in two parts:
 
-the paid version needs you to create an account and login.
+  A Chat App (free version) that you can pick 
+  
+   Developer API (paid version, $0.04 per request) that can build helps you build AI apps. 
 
-it costs $0.02 per prompt or $1 per 50 prompts
+twoPrompt developer API (login needed): https://twoprompt.de/developer.html
 
-installation: ``` pip install twoprompt --break-system-packages ```
-
-then run in the CLI: ```prompt```
+twoPrompt Chat App (no login needed): https://twoprompt.de/chats.html
 
 
 models list:
@@ -23,6 +23,7 @@ models list:
   5. Ministral-3B
   6. Cohere-command-r-plus-08-2024
   7. Google search prompter (not a LLM but i added the google search prompter anyway)
+  8. jais-30b-chat
 
 hope you enjoy it and happy prompting
 

@@ -1,7 +1,6 @@
-import {initializeApp} from 'firebase/app'
-import {initializeAppCheck, ReCaptchaEnterpriseProvider} from 'firebase/app-check'
-import {getAuth, onAuthStateChanged, signInAnonymously, GithubAuthProvider, GoogleAuthProvider} from 'firebase/auth'
-import {doc, getFirestore, setDoc} from 'firebase/firestore'
+import { initializeApp } from 'firebase/app'
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check'
+import { getAuth, onAuthStateChanged, signInAnonymously } from 'firebase/auth'
 
 const config = {
     apiKey: "",
@@ -16,16 +15,12 @@ const config = {
 const app = initializeApp(config)
 
 const appcheck = initializeAppCheck(app, {
-    provider: new ReCaptchaEnterpriseProvider("6LeUEpErAAAAAHJn66FWfNdoc9QSsqxjeVpj6DPa"), 
+    provider: new ReCaptchaEnterpriseProvider("6LeUEpErAAAAAHJn66FWfNdoc9QSsqxjeVpj6DPa"),
     isTokenAutoRefreshEnabled: true
 })
 
-const db = getFirestore(app)
-
 const auth = getAuth(app)
 auth.useDeviceLanguage()
-
-signInAnonymously(auth)
 
 onAuthStateChanged(auth, (user) => {
     if(user == null){
